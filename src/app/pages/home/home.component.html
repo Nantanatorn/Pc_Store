@@ -1,0 +1,29 @@
+<mat-drawer-container class="h-screen bg-gradient-to-b from-cyan-100 to-cyan-300">
+    <mat-drawer mode="side" opened class="p-6">
+      <app-filters (showCategory)="onShowCategory($event)"></app-filters>
+    </mat-drawer>
+  
+    <div class="p-6 min-h-full max-w-7xl mx-auto border-x">
+      <app-products-header
+        (columnsCountChange)="oncolumnsCountChange($event)"
+        (itemsCountChange)="onItemsCountChange($event)"
+        (sortChange)="onsortChange($event)"
+      ></app-products-header>
+      
+      <mat-grid-list
+        gutterSize="16"
+        [cols]="cols"
+        [rowHeight]="rowHeight"
+      >
+        <mat-grid-tile *ngFor="let product of products">
+          <app-product-box
+            [product]="product"
+            (addToCart)="onAddToCart($event)"
+            class="w-full"
+            [fullWidthMode]="cols === 1"
+          ></app-product-box>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-drawer-container>
+  
